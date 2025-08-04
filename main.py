@@ -16,13 +16,13 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "title": "Início"})
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/gastos", response_class=HTMLResponse)
 async def mostrar_gastos(request: Request):
     lista_gastos = [
         Gastos(dono="Matheus", cartao="5256", vigencia="Mar-2025", valor=11.90),
         Gastos(dono="Gabriella", cartao="4897", vigencia="Mar-2025", valor=45.00),
     ]
-    return templates.TemplateResponse("index.html", {
+    return templates.TemplateResponse("gastos.html", {
         "request": request,
         "gastos": lista_gastos
     })
