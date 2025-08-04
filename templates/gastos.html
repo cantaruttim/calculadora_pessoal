@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for g in gastos %}
+        <h2>{{ g.dono }}</h2>
+        <p>Cartão: {{ g.cartao }}</p>
+        <p>Vigência: {{ g.vigencia }}</p>
+        <p>Valor: R$ {{ g.valor }}</p>
+        <hr>
+    {% endfor %}
+
+{% endblock %}
