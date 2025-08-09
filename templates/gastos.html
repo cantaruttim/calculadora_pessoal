@@ -4,9 +4,6 @@
     <h1 style="margin-top: 32px; margin-bottom: 24px; font-size: 2rem; font-weight: bold; text-align: center;">
         Gastos
     </h1>
-    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 24px;">
-        Total gasto no mês: <strong>R$ {{ gastos | sum(attribute='valor') | round(2) }}</strong>
-    </p>
     <hr />
     <br />
 
@@ -52,4 +49,4 @@
             {% endfor %}
         </tbody>
     </table>
-{%
+{% endblock %}
