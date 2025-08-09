@@ -5,6 +5,9 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = BASE_DIR / "data" / "gastos.csv"
+
 def ler_gastos_csv():
     lista_gastos = []
     if CSV_PATH.exists():
@@ -12,10 +15,10 @@ def ler_gastos_csv():
             reader = csv.DictReader(csvfile)
             for row in reader:
                 lista_gastos.append(Gastos(
-                    dono=row['dono'],
-                    cartao=row['cartao'],
-                    vigencia=row['vigencia'],
-                    valor=float(row['valor'])
+                    dono=row['Dono'],
+                    cartao=row['Cartão'],
+                    vigencia=row['Vigência'],
+                    valor=row['Valor']
                 ))
     return lista_gastos
 

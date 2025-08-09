@@ -1,15 +1,11 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 
-from httpx import request
 from models.Gastos import Gastos
-from resource.funcionalidades import (
-    ler_gastos_csv,
-    adicionar_gasto_csv
-)
+from src.funcionalidades import ler_gastos_csv, adicionar_gasto_csv
 
 app = FastAPI()
 

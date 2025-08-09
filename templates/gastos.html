@@ -5,10 +5,33 @@
         Gastos
     </h1>
     <p style="text-align: center; font-size: 1.2rem; margin-bottom: 24px;">
-            Total gasto no mês: <strong>R$ {{ gastos | sum(attribute='valor') | round(2) }}</strong>
+        Total gasto no mês: <strong>R$ {{ gastos | sum(attribute='valor') | round(2) }}</strong>
     </p>
     <hr />
-    <br /> 
+    <br />
+
+    <!-- Formulário para adicionar novo gasto -->
+    <form action="/gastos/adicionar" method="post" style="max-width: 500px; margin: 0 auto 32px auto; padding: 24px; border: 1px solid #ccc; border-radius: 8px;">
+        <h2 style="text-align: center; margin-bottom: 16px;">Adicionar Gasto</h2>
+        <div style="margin-bottom: 12px;">
+            <label for="dono">Dono:</label>
+            <input type="text" id="dono" name="dono" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="margin-bottom: 12px;">
+            <label for="cartao">Cartão:</label>
+            <input type="text" id="cartao" name="cartao" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="margin-bottom: 12px;">
+            <label for="vigencia">Vigência:</label>
+            <input type="text" id="vigencia" name="vigencia" required style="width: 100%; padding: 8px;">
+        </div>
+        <div style="margin-bottom: 16px;">
+            <label for="valor">Valor (R$):</label>
+            <input type="number" step="0.01" id="valor" name="valor" required style="width: 100%; padding: 8px;">
+        </div>
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #232321; color: white; border: none; border-radius: 4px; font-size: 1rem;">Adicionar</button>
+    </form>
+
     <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
         <thead style="background-color: #232321; color: white;">
             <tr>
@@ -29,4 +52,4 @@
             {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+{%
