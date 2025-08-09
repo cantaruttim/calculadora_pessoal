@@ -19,7 +19,7 @@ async def home(request: Request):
 @app.get("/gastos", response_class=HTMLResponse)
 async def mostrar_gastos(request: Request):
     lista_gastos = [
-        Gastos(dono="Matheus", cartao="5256", vigencia="Mar-2025", valor=11.90),
+        Gastos(dono="Matheus Cantarutti", cartao="5256", vigencia="Mar-2025", valor=11.90),
         Gastos(dono="Gabriella", cartao="4897", vigencia="Mar-2025", valor=45.00),
     ]
     return templates.TemplateResponse("gastos.html", {
