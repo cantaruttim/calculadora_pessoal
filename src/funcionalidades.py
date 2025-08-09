@@ -26,13 +26,13 @@ def ler_gastos_csv():
 def adicionar_gasto_csv(gasto: Gastos):
     file_exists = CSV_PATH.exists()
     with open(CSV_PATH, 'a', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['dono', 'cartao', 'vigencia', 'valor']
+        fieldnames = ['Dono', 'Cartão', 'Vigência', 'Valor']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if not file_exists:
             writer.writeheader()
         writer.writerow({
-            'dono': gasto.dono,
-            'cartao': gasto.cartao,
-            'vigencia': gasto.vigencia,
-            'valor': gasto.valor
+            'Dono': gasto.Dono,
+            'Cartão': gasto.cartao,
+            'Vigência': gasto.vigencia,
+            'Valor': gasto.valor
         })
