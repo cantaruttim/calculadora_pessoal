@@ -6,6 +6,10 @@ from pathlib import Path
 
 from httpx import request
 from models.Gastos import Gastos
+from resource.funcionalidades import (
+    ler_gastos_csv,
+    adicionar_gasto_csv
+)
 
 app = FastAPI()
 
@@ -18,14 +22,23 @@ async def home(request: Request):
 
 @app.get("/gastos", response_class=HTMLResponse)
 async def mostrar_gastos(request: Request):
-    lista_gastos = [
-        Gastos(dono="Matheus Cantarutti", cartao="5256", vigencia="Mar-2025", valor=11.90),
-        Gastos(dono="Gabriella", cartao="4897", vigencia="Mar-2025", valor=45.00),
-    ]
+    lista_gastos = ler_gastos_csv()
     return templates.TemplateResponse("gastos.html", {
         "request": request,
         "gastos": lista_gastos
     })
+
+@app.post("/gastos/adicionar")
+async def adicionar_gasto(
+    request: Request,
+    dono: str = Form(...),
+    cartao: str = Form(...),
+    vigencia: str = Form(...),
+    valor: float = Form(...)
+):
+    novo_gasto = Gastos(dono=dono, cartao=cartao, vigencia=vigencia, valor=valor)
+    adicionar_gasto_csv(novo_gasto)
+    return RedirectResponse(url="/gastos", status_code=303)
 
 @app.get("/sobre", response_class=HTMLResponse)
 async def sobre(request: Request):
