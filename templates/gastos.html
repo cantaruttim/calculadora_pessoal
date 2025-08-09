@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    {% for g in gastos %}
-        <h2>{{ g.dono }}</h2>
-        <p>Cartão: {{ g.cartao }}</p>
-        <p>Vigência: {{ g.vigencia }}</p>
-        <p>Valor: R$ {{ g.valor }}</p>
-        <hr>
-    {% endfor %}
-
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Dono</th>
+                <th>Cartão</th>
+                <th>Vigência</th>
+                <th>Valor (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in gastos %}
+            <tr>
+                <td>{{ g.dono }}</td>
+                <td>{{ g.cartao }}</td>
+                <td>{{ g.vigencia }}</td>
+                <td>{{ g.valor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

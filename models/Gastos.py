@@ -1,7 +1,6 @@
-from pydantic import BaseModel
-
-class Gastos(BaseModel):
-    dono: str
-    cartao: str
-    vigencia: str
-    valor: float
+class Gastos:
+    def __init__(self, dono, cartao, vigencia, valor):
+        self.dono = dono
+        self.cartao = cartao
+        self.vigencia = vigencia
+        self.valor = valor
