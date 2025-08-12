@@ -25,6 +25,13 @@ def ler_gastos_csv():
 
 def adicionar_gasto_csv(gasto: Gastos):
     file_exists = CSV_PATH.exists()
+    # Garante quebra de linha ao final do arquivo, se necessário
+    if file_exists:
+        with open(CSV_PATH, 'rb+') as f:
+            f.seek(-1, 2)
+            last_char = f.read(1)
+            if last_char != b'\n':
+                f.write(b'\n')
     with open(CSV_PATH, 'a', encoding='utf-8') as csvfile:
         fieldnames = ['Dono', 'Cartão', 'Vigência', 'Valor']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
