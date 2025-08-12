@@ -148,8 +148,6 @@ def tras_dono_cartao(tabela):
     df22 = df22.merge(donos, on='Cartão', how='left')
     return df22
 
-
-
 def reordena_colunas(df2):
     cols = df2.columns.tolist()
     # Garante que 'Dono' e 'Cartão' estejam no início
