@@ -8,6 +8,17 @@ from fastapi.templating import Jinja2Templates
 BASE_DIR = Path(__file__).resolve().parent.parent
 CSV_PATH = BASE_DIR / "data" / "gastos.csv"
 
+
+def limpar_valor(valor_str: str) -> float:
+    valor_str = valor_str.replace("R$", "").replace(" ", "").strip()
+    valor_str = valor_str.replace(".", "")  # remove pontos de milhar
+    valor_str = valor_str.replace(",", ".") # transforma vírgula em ponto decimal
+    try:
+        return float(valor_str)
+    except ValueError:
+        return 0.0
+
+
 def ler_gastos_csv():
     lista_gastos = []
     if CSV_PATH.exists():
@@ -18,13 +29,17 @@ def ler_gastos_csv():
                     dono=row['Dono'],
                     cartao=row['Cartão'],
                     vigencia=row['Vigência'],
-                    valor=row['Valor']
+                    valor=limpar_valor(row['Valor'])
                 ))
     return lista_gastos
 
 
 def adicionar_gasto_csv(gasto: Gastos):
     file_exists = CSV_PATH.exists()
+
+    valor_limpo = limpar_valor(str(gasto.valor))
+    valor_formatado = f"{valor_limpo:.2f}" 
+
     # Garante quebra de linha ao final do arquivo, se necessário
     if file_exists:
         with open(CSV_PATH, 'rb+') as f:
@@ -41,5 +56,5 @@ def adicionar_gasto_csv(gasto: Gastos):
             'Dono': gasto.dono,
             'Cartão': gasto.cartao,
             'Vigência': gasto.vigencia,
-            'Valor': gasto.valor
+            'Valor': valor_formatado
         })
