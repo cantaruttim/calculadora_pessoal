@@ -19,9 +19,11 @@ async def home(request: Request):
 @app.get("/gastos", response_class=HTMLResponse)
 async def mostrar_gastos(request: Request):
     lista_gastos = ler_gastos_csv()
+    total = sum(g.valor for g in lista_gastos)
     return templates.TemplateResponse("gastos.html", {
         "request": request,
-        "gastos": lista_gastos
+        "gastos": lista_gastos,
+        "total": total
     })
 
 @app.post("/gastos/adicionar")
