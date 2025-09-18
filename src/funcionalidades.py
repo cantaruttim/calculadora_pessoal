@@ -18,7 +18,6 @@ def limpar_valor(valor_str: str) -> float:
     except ValueError:
         return 0.0
 
-
 def ler_gastos_csv():
     lista_gastos = []
     if CSV_PATH.exists():
