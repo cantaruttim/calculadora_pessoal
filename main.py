@@ -32,7 +32,12 @@ async def adicionar_gasto(
     vigencia: str = Form(...),
     valor: float = Form(...)
 ):
-    novo_gasto = Gastos(dono=dono, cartao=cartao, vigencia=vigencia, valor=valor)
+    novo_gasto = Gastos(
+        dono=dono, 
+        cartao=cartao, 
+        vigencia=vigencia, 
+        valor=valor
+    )
     adicionar_gasto_csv(novo_gasto)
     return RedirectResponse(url="/gastos", status_code=303)
 
